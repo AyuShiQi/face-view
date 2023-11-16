@@ -51,14 +51,9 @@ button:hover {
   border-color: #646cff;
 }
 
-.card {
-  padding: 2em;
-}
-
 #app {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 10px;
   text-align: center;
 }
 

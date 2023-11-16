@@ -1,8 +1,9 @@
 <template>
   <div class="main-content">
-    <h1>VGG人脸表情识别</h1>
-    <div style="width: 300px; height: 300px;">
-      <img :src="imgsrc" alt="暂无图片" style="width: 100%; height: 100%;">
+    <h3>VGG人脸表情识别</h3>
+    <div style="width: 280px; height: 280px;" class="img-box">
+      <img v-if="imgsrc" :src="imgsrc" alt="暂无图片" style="width: 100%; height: 100%;">
+      <p v-else>暂无图片</p>
     </div>
     <p v-if="waiting" style="display: flex; align-items: center; gap: 8px;" class="pp">
       <vi-loading type="round" style="--vi-loading-width: 2em;">
@@ -27,7 +28,11 @@ const resLabel = ref('')
 const waiting = ref(false)
 
 const faceView = computed(() => {
-  switch(resLabel.value) {
+  return labelParse(resLabel.value)
+})
+
+function labelParse (label: string) {
+  switch(label) {
     case 'sad':
       return '伤心的'
     case 'disgust':
@@ -45,7 +50,7 @@ const faceView = computed(() => {
     default:
       return ''
   }
-})
+}
 
 async function handleGetFile (file: File) {
   console.log(file)
@@ -86,6 +91,12 @@ function readImg (file: File): Promise<any> {
   align-items: center;
   flex-direction: column;
   gap: 8px;
+}
+
+.img-box {
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 var(--vi-purple-color6);
 }
 
 .pp {
